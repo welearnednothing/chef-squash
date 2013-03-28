@@ -1,2 +1,2 @@
-node.default['rbenv']['rubies'] = [ "jruby-1.9" ]
+node.default['rbenv']['rubies'] = [ "jruby-1.6.5" ]
 
