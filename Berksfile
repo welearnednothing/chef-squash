@@ -2,7 +2,7 @@ metadata
 
 cookbook 'yum'
 cookbook 'apt'
-
+cookbook 'ruby_build',        :git => 'git://github.com/fnichol/chef-ruby_build.git'
 cookbook 'rbenv',             :git => 'git://github.com/fnichol/chef-rbenv.git'
 
 cookbook 'nginx',             :git => 'git://github.com/bbg-cookbooks/nginx.git', :ref => 'bluebox'
