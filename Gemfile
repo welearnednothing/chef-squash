@@ -4,3 +4,7 @@ gem 'berkshelf'
 gem 'berkshelf-vagrant'
 gem 'test-kitchen', :git => 'git://github.com/opscode/test-kitchen.git', :ref => 'v1.0.0.alpha.1'
 gem 'kitchen-vagrant', :git => 'git://github.com/opscode/kitchen-vagrant.git'
+
+group "bluebox_testing" do
+  gem "kitchen-bluebox"
+end
