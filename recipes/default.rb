@@ -17,8 +17,13 @@
 # limitations under the License.
 #
 
+include_recipe "user"
 include_recipe "squash::_git"
 include_recipe "java"
 include_recipe "ruby_build"
-include_recipe "rbenv::system"
+include_recipe "squash::_rbenv"
 include_recipe "squash::_postgresql"
+
+
+
+
