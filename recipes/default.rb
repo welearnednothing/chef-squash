@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 
+include_recipe "squash::_git"
 include_recipe "java"
 include_recipe "ruby_build"
 include_recipe "rbenv::system"
