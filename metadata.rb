@@ -9,3 +9,4 @@ version          '0.1.0'
 depends "java"
 depends "ruby_build"
 depends "rbenv"
+depends "postgresql"
