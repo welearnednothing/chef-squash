@@ -9,6 +9,7 @@ version          '0.1.0'
 depends "user"
 depends "git"
 depends "java"
+depends "jboss"
 depends "ruby_build"
 depends "rbenv"
 depends "postgresql"
