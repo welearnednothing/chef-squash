@@ -20,7 +20,7 @@
 include_recipe "user"
 include_recipe "squash::_git"
 include_recipe "java"
-include_recipe "jboss"
+include_recipe "jboss::standalone"
 include_recipe "ruby_build"
 include_recipe "squash::_rbenv"
 include_recipe "squash::_postgresql"
