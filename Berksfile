@@ -6,7 +6,7 @@ cookbook 'git'
 cookbook 'java',              :git => 'git://github.com/opscode-cookbooks/java.git'
 
 # cookbook 'jboss',             :git => 'git://github.com/bryanwb/chef-jboss.git'
-cookbook 'jboss',             :git => 'git://github.com/sandfish8/chef-jboss.git'
+cookbook 'jboss',             :git => 'git://github.com/sandfish8/chef-jboss.git', :ref => 'bluebox'
 
 cookbook 'ruby_build',        :git => 'git://github.com/fnichol/chef-ruby_build.git'
 cookbook 'rbenv',             :git => 'git://github.com/fnichol/chef-rbenv.git'
