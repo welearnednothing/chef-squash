@@ -16,3 +16,7 @@ cookbook 'rbenv',             :git => 'git://github.com/fnichol/chef-rbenv.git'
 cookbook 'nginx',             :git => 'git://github.com/bbg-cookbooks/nginx.git', :ref => 'bluebox'
 cookbook 'unicorn'
 cookbook 'postgresql', :git => 'git://github.com/opscode-cookbooks/postgresql.git'
+
+group "bluebox_internal" do
+  cookbook 'bbg_repositories', :git => 'git@github.blueboxgrid.com:chef/bbg_repositories.git'
+end
