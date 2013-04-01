@@ -7,10 +7,10 @@ GIT
 
 GIT
   remote: git://github.com/opscode/test-kitchen.git
-  revision: d9e898babf71df46d8d5b5fac693fa33c8ab19c1
-  ref: v1.0.0.alpha.1
+  revision: 5fe88947b6a66f0ad56e2f0ad4b8f90fb756806d
+  ref: v1.0.0.alpha.2
   specs:
-    test-kitchen (1.0.0.alpha.1)
+    test-kitchen (1.0.0.alpha.2)
       celluloid
       mixlib-shellout
       net-scp
@@ -75,7 +75,7 @@ GEM
     hashie (2.0.3)
     i18n (0.6.4)
     json (1.7.7)
-    kitchen-bluebox (0.5.0)
+    kitchen-bluebox (0.5.1.dev)
       fog
       test-kitchen (~> 1.0.0.alpha.0)
     method_source (0.8.1)
@@ -130,6 +130,6 @@ PLATFORMS
 DEPENDENCIES
   berkshelf
   berkshelf-vagrant
-  kitchen-bluebox
+  kitchen-bluebox (= 0.5.1.dev)
   kitchen-vagrant!
   test-kitchen!
