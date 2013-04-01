@@ -1,4 +1,5 @@
 node.default['rbenv']['rubies'] = [ "jruby-1.6.5", "1.9.3-p286" ]
+node.default['rbenv']['global'] = "1.9.3-p286"
 
 node.default['rbenv']['gems'] = {
   "jruby-1.6.5" => [
@@ -8,3 +9,5 @@ node.default['rbenv']['gems'] = {
 }
 
 include_recipe "rbenv::system"
+
+
