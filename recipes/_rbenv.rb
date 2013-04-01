@@ -1,8 +1,9 @@
-node.default['rbenv']['rubies'] = [ "1.9.3-p286" ]
+node.default['rbenv']['rubies'] = [ "jruby-1.6.5", "1.9.3-p286" ]
 
 node.default['rbenv']['gems'] = {
-  "1.9.3-p286" => [
+  "jruby-1.6.5" => [
     { "name" => "bundler" },
+    { "name" => "trinidad" }
   ]
 }
 
