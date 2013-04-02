@@ -1,5 +1,7 @@
 ---
 driver_plugin: vagrant
+driver_config:
+  file_cache_path: /var/cache/kitchen-solo  
 
 platforms:
 - name: centos-6.3
@@ -19,8 +21,7 @@ platforms:
 
 suites:
 - name: default
-  run_list:
-  - recipe[squash]
+  run_list: {}
   attributes: 
     users: 
     - deploy

@@ -5,20 +5,6 @@ GIT
     kitchen-vagrant (0.7.4.dev)
       test-kitchen (~> 1.0.0.alpha.1)
 
-GIT
-  remote: git://github.com/opscode/test-kitchen.git
-  revision: 5fe88947b6a66f0ad56e2f0ad4b8f90fb756806d
-  ref: v1.0.0.alpha.2
-  specs:
-    test-kitchen (1.0.0.alpha.2)
-      celluloid
-      mixlib-shellout
-      net-scp
-      net-ssh
-      pry
-      safe_yaml
-      thor
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -120,6 +106,14 @@ GEM
     slop (3.4.4)
     solve (0.4.2)
       json
+    test-kitchen (1.0.0.dev)
+      celluloid
+      mixlib-shellout
+      net-scp
+      net-ssh
+      pry
+      safe_yaml
+      thor
     thor (0.16.0)
     timers (1.1.0)
     yajl-ruby (1.1.0)
@@ -132,4 +126,4 @@ DEPENDENCIES
   berkshelf-vagrant
   kitchen-bluebox (= 0.5.1.dev)
   kitchen-vagrant!
-  test-kitchen!
+  test-kitchen
