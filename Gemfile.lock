@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/opscode/kitchen-vagrant.git
-  revision: c2f9851e7adb1362a623d64602f418ab6d00cd18
+  revision: b76a93106721595103772e1410459d2bb6f5718c
   specs:
-    kitchen-vagrant (0.7.4.dev)
-      test-kitchen (~> 1.0.0.alpha.1)
+    kitchen-vagrant (0.7.5.dev)
+      test-kitchen (~> 1.0.0.alpha.2)
 
 GEM
   remote: http://rubygems.org/
@@ -65,12 +65,12 @@ GEM
       fog
       test-kitchen (~> 1.0.0.alpha.0)
     method_source (0.8.1)
-    mime-types (1.21)
+    mime-types (1.22)
     minitar (0.5.4)
     mixlib-authentication (1.3.0)
       mixlib-log
     mixlib-config (1.1.2)
-    mixlib-log (1.4.1)
+    mixlib-log (1.6.0)
     mixlib-shellout (1.1.0)
     multi_json (1.7.2)
     multipart-post (1.2.0)
