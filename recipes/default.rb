@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+directory "/var/cache/kitchen-solo"
+
 include_recipe "user"
 include_recipe "squash::_git"
 include_recipe "tomcat"
