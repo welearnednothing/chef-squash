@@ -1,6 +1,7 @@
 metadata
 
 cookbook 'bluebox',           :git => 'git@github.blueboxgrid.com:chef/bluebox.git'
+cookbook 'user'
 cookbook 'yum'
 cookbook 'apt'
 cookbook 'git'
