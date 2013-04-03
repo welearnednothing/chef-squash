@@ -30,11 +30,5 @@ postgresql_database node['squash']['db'] do
   action :create
 end
 
-postgresql_database_user 'foo_user' do
-  connection postgresql_connection_info
-  database_name node['squash']['db']
-  privileges [:all]
-  action :grant
-end
 
 
