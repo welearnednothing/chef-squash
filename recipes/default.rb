@@ -27,23 +27,22 @@ include_recipe "squash::_postgresql"
 
 current_dir = node.default.squash.root + "/current"
 
-# deploy_revision node.default.squash.root do
-#   migrate false
-#   repository node.default.squash.repo
-#   revision node.default.squash.commit 
-#   user node.default.squash.user
-#   group node.default.squash.group
-#   before_restart do
-#     execute "bundle" do
-#       command "jruby -S bundle install"
-#       user node.default.squash.user
-#       cwd current_dir
-#       only_if do
-#         File.exists? File.join(current_dir, "Gemfile")
-#       end
-#    end
-#   end
-#   notifies :restart, "service[squash_unicorn]"  
-# end
+deploy_revision node.default.squash.root do
+  migrate true
+  repository node.default.squash.repo
+  revision node.default.squash.commit 
+  user node.default.squash.user
+  group node.default.squash.group
+  before_restart do
+    execute "bundle" do
+      command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && bundle install"
+      user node.default.squash.user
+      cwd current_dir
+      only_if do
+        File.exists? File.join(current_dir, "Gemfile")
+      end
+   end
+  end
+end
 
 
