@@ -5,6 +5,8 @@ node.default.authorization = {
     'passwordless' => true
   }  
 }
+node.default.groups = ["blueboxadmin", "deploy"]
 
+include_recipe "user::data_bag"
 
   
