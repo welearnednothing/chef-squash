@@ -1,7 +1,7 @@
 node.override.users = ['deploy', 'blueboxadmin']
 node.override.authorization = {
   'sudo' => {
-    'users' => ['deploy','blueboxadmin'],
+    'users' => ['deploy','blueboxadmin', 'kitchen'],
     'passwordless' => true
   }  
 }
