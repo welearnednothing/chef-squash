@@ -18,7 +18,6 @@ end
 
 include_recipe "postgresql::ruby"
 
-
 postgresql_connection_info = {
   :host => "127.0.0.1",
   :port => node['postgresql']['config']['port'],
