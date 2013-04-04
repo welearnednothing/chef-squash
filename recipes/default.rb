@@ -25,20 +25,20 @@ include_recipe "tomcat"
 include_recipe "squash::_rbenv"
 include_recipe "squash::_postgresql"
 
-current_dir = node.default.squash.root + "/current"
+current_dir = node.squash.root + "/current"
 
-deploy_revision node.default.squash.root do
+deploy_revision node.squash.root do
   migrate true
-  repository node.default.squash.repo
-  revision node.default.squash.commit 
-  user node.default.squash.user
-  group node.default.squash.group
+  repository node.squash.repo
+  revision node.squash.commit 
+  user node.squash.user
+  group node.squash.group
   before_restart do
     execute "bundle" do
       command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && bundle install"
-      user node.default.squash.user
+      user node.squash.user
       cwd current_dir
-      only_if do
+_if do
         File.exists? File.join(current_dir, "Gemfile")
       end
    end
