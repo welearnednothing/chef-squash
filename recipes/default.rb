@@ -26,6 +26,17 @@ include_recipe "squash::_rbenv"
 include_recipe "squash::_postgresql"
 
 current_dir = node.squash.root + "/current"
+shared_dir = node.squash.root + "/shared"
+
+template "#{shared_dir}/config/database.yml" do
+  owner "deploy"
+  group "deploy"
+  mode "00600"
+  variables :db_host => node.squash.db.host,
+  :db_user => node.squash.db.user,
+  :db_password => node.squash.db.paswword,
+  :db_name => node.squash.db.name
+end
 
 deploy_revision node.squash.root do
   migrate true
