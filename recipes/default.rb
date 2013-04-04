@@ -28,6 +28,8 @@ include_recipe "squash::_postgresql"
 current_dir = node.squash.root + "/current"
 shared_dir = node.squash.root + "/shared"
 
+directory "#{shared_dir}/config"
+
 template "#{shared_dir}/config/database.yml" do
   owner "deploy"
   group "deploy"
