@@ -34,7 +34,7 @@ template "#{shared_dir}/config/database.yml" do
   mode "00600"
   variables :db_host => node.squash.db.host,
   :db_user => node.squash.db.user,
-  :db_password => node.squash.db.paswword,
+  :db_password => node.postgresql.password.postgres,
   :db_name => node.squash.db.name
 end
 

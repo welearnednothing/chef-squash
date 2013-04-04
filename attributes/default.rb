@@ -6,7 +6,6 @@ node.default.squash.group = "deploy"
 node.default.squash.db.name = "squash"
 node.default.squash.db.host = "localhost"
 node.default.squash.db.user = "postgres"
-node.default.squash.db.password = node.postgresql.password
 
 
 
