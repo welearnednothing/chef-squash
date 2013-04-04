@@ -3,6 +3,6 @@
   "home": "/home/deploy",
   "gid": 501,
   "id": "deploy",
-  "uid": 500,
+  "uid": 501,
   "groups": [ "deploy"]
 }
