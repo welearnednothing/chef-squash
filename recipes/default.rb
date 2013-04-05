@@ -29,7 +29,15 @@ current_dir = node.squash.root + "/current"
 shared_dir = node.squash.root + "/shared"
 
 directory "#{shared_dir}/config/initializers" do
+  owner node.squash.user
+  group node.squash.group
   recursive true
+  notifies :run, "execute[chown_srv_squash]", :immediately
+end
+
+execute "chown_srv_squash" do
+  command "chown -R #{node.squash.user}:#{node.squash.group} #{node.squash.root}"
+  action :nothing
 end
 
 # database.yml
