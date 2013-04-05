@@ -40,6 +40,11 @@ execute "chown_srv_squash" do
   action :nothing
 end
 
+directory "#{shared_dir}/log" do
+  owner node.squash.user
+  group node.squash.group
+end
+
 # database.yml
 template "#{shared_dir}/config/database.yml" do
   owner "deploy"
