@@ -2,6 +2,8 @@ node.default[:squash][:server_name] = "squash.blueboxgrid.com"
 node.default[:squash][:ssl_key_dir] = "/etc/nginx/ssl"
 node.default[:squash][:port] = "3000"
 
+node.default[:nginx][:worker_processes] = 4
+
 directory node[:squash][:ssl_key_dir] do
   owner "root"
   group "root"
