@@ -7,7 +7,8 @@ node.default['rbenv']['gems'] = {
   ], 
   "jruby-1.7.3" => [
     { "name" => "bundler" },
-    { "name" => "trinidad" }
+    { "name" => "trinidad" },
+    { "name" => "trinidad_init_services" }
   ]
 }
 
