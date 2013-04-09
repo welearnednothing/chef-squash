@@ -23,8 +23,7 @@ include_recipe "squash::_nginx"
 
 include_recipe "squash::_user"
 include_recipe "squash::_git"
-include_recipe "java"
-include_recipe "tomcat"
+include_recipe "squash::_java"
 include_recipe "squash::_rbenv"
 include_recipe "squash::_postgresql"
 
