@@ -19,6 +19,8 @@
 
 directory "/var/cache/kitchen-solo"
 
+include_recipe "squash::_nginx"
+
 include_recipe "squash::_user"
 include_recipe "squash::_git"
 include_recipe "tomcat"
@@ -38,11 +40,6 @@ end
 execute "chown_srv_squash" do
   command "chown -R #{node.squash.user}:#{node.squash.group} #{node.squash.root}"
   action :nothing
-end
-
-directory "#{shared_dir}/log" do
-  owner node.squash.user
-  group node.squash.group
 end
 
 # database.yml
