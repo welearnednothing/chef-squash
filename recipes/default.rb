@@ -23,6 +23,7 @@ include_recipe "squash::_nginx"
 
 include_recipe "squash::_user"
 include_recipe "squash::_git"
+include_recipe "java"
 include_recipe "tomcat"
 include_recipe "squash::_rbenv"
 include_recipe "squash::_postgresql"
@@ -80,5 +81,11 @@ _if do
    end
   end
 end
+
+# things to do to app to get it to start:
+# bundle exec rake assets:precompile
+
+# maybe fork squash and set this up for nginx
+# config/environments/production.rb#42
 
 

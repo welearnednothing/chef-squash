@@ -9,6 +9,7 @@ cookbook 'yum'
 cookbook 'apt'
 cookbook 'git'
 
+cookbook 'java'
 cookbook 'tomcat',            :git => 'git://github.com/bbg-cookbooks/tomcat.git', :ref => 'bluebox'
 
 cookbook 'ruby_build',        :git => 'git://github.com/fnichol/chef-ruby_build.git'
