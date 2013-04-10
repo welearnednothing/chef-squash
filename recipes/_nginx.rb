@@ -1,8 +1,6 @@
-node.default[:squash][:server_name] = "squash.blueboxgrid.com"
-node.default[:squash][:ssl_key_dir] = "/etc/nginx/ssl"
-node.default[:squash][:port] = "3000"
-
 node.default[:nginx][:worker_processes] = 4
+
+include_recipe "nginx"
 
 directory node[:squash][:ssl_key_dir] do
   owner "root"
@@ -34,4 +32,3 @@ link "/etc/nginx/sites-enabled/squash.conf" do
   to "/etc/nginx/sites-available/squash.conf"
 end
 
-include_recipe "nginx"
