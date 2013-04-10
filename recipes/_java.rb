@@ -17,7 +17,9 @@ end
 
 init_config = "#{node[:squash][:shared_dir]}/tmp/trinidad_init_defaults.yml"
 
-directory "#{node[:squash][:shared_dir]}/tmp"
+directory "#{node[:squash][:shared_dir]}/tmp" do
+  recursive true
+end
 
 template init_config do
   variables :app_path => node[:squash][:root_dir]
