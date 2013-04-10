@@ -20,17 +20,13 @@
 directory "/var/cache/kitchen-solo"
 
 include_recipe "squash::_nginx"
-
 include_recipe "squash::_user"
 include_recipe "squash::_git"
 include_recipe "squash::_java"
 include_recipe "squash::_rbenv"
 include_recipe "squash::_postgresql"
 
-current_dir = node.squash.root + "/current"
-shared_dir = node.squash.root + "/shared"
-
-directory "#{shared_dir}/config/initializers" do
+directory "#{node[:squash][:shared_dir]}/config/initializers" do
   owner node.squash.user
   group node.squash.group
   recursive true
@@ -43,7 +39,7 @@ execute "chown_srv_squash" do
 end
 
 # database.yml
-template "#{shared_dir}/config/database.yml" do
+template "#{node[:squash][:shared_dir]}/config/database.yml" do
   owner "deploy"
   group "deploy"
   mode "00600"
@@ -54,7 +50,7 @@ template "#{shared_dir}/config/database.yml" do
 end
 
 # secret_token
-template "#{shared_dir}/config/initializers/secret_token.rb" do
+template "#{node[:squash][:shared_dir]}/config/initializers/secret_token.rb" do
   action :create_if_missing
   owner "deploy"
   group "deploy"
@@ -73,9 +69,9 @@ deploy_revision node.squash.root do
     execute "bundle" do
       command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && bundle install"
       user node.squash.user
-      cwd current_dir
-_if do
-        File.exists? File.join(current_dir, "Gemfile")
+      cwd node[:squash][:current_dir]
+      only_if do
+        File.exists? File.join(node[:squash][:current_dir], "Gemfile")
       end
    end
   end
