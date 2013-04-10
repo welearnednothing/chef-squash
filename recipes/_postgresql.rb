@@ -16,7 +16,10 @@ link "/usr/bin/pg_config" do
   to "/usr/pgsql-9.2/bin/pg_config"
 end
 
-include_recipe "postgresql::ruby"
+# it will fail here the first time
+# comment this out and converge again
+# then uncomment
+# include_recipe "postgresql::ruby"
 
 postgresql_connection_info = {
   :host => "127.0.0.1",
