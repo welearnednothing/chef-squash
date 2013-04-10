@@ -24,7 +24,7 @@ template init_config do
 end
 
 execute "build_trinidad_init_service" do
-  command "RBENV=#{node[:squash][:jruby][:version]} jruby -S trinidad_init_service --defaults #{init_config}"
+  command "RBENV_VERSION=#{node[:squash][:jruby][:version]} jruby -S trinidad_init_service --defaults #{init_config}"
 end
 
 service "trinidad" do
