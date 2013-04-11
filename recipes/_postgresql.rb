@@ -14,6 +14,9 @@ yum_repository "postgres_scientific" do
   action :create
 end
 
+# ended up running this by hand:
+# rpm -Uhv http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-sl92-9.2-8.noarch.rpm
+
 include_recipe "postgresql::server"
 
 # postgres needs to build from source b/c of issue w/ omnibus
@@ -25,7 +28,7 @@ end
 # it will fail here the first time
 # comment this out and converge again
 # then uncomment
-include_recipe "postgresql::ruby"
+# include_recipe "postgresql::ruby"
 
 postgresql_connection_info = {
   :host => "127.0.0.1",

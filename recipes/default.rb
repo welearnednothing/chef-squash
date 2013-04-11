@@ -23,9 +23,10 @@ include_recipe "yum::epel"
 include_recipe "squash::_nginx"
 include_recipe "squash::_user"
 include_recipe "squash::_git"
+include_recipe "squash::_postgresql"
 include_recipe "squash::_java"
 include_recipe "squash::_rbenv"
-include_recipe "squash::_postgresql"
+include_recipe "squash::_trinidad_init_services"
 
 directory "#{node[:squash][:shared_dir]}/config/initializers" do
   owner node[:squash][:user]
