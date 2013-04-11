@@ -34,7 +34,7 @@ end
 # it will fail here the first time
 # comment this out and converge again
 # then uncomment
-if `rpm -qa | grep postgresql`
+if `rpm -qa`.include?('postgresql92')
   include_recipe "postgresql::ruby"
 end
 
