@@ -34,7 +34,9 @@ end
 # it will fail here the first time
 # comment this out and converge again
 # then uncomment
-# include_recipe "postgresql::ruby"
+if `rpm -qa | grep postgresql`
+  include_recipe "postgresql::ruby"
+end
 
 postgresql_connection_info = {
   :host => "127.0.0.1",
