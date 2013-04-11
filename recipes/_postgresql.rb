@@ -9,9 +9,15 @@ node.override.postgresql.config_pgtune.db_type = "web"
 node.override.postgresql.config_pgtune.total_memory = "2097152kB"
 
 # add the postgres repo
-yum_repository "postgres_scientific" do
-  url "http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-sl92-9.2-8.noarch.rpm"
-  action :create
+# yum_repository "postgres_scientific" do
+#   url "http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-sl92-9.2-8.noarch.rpm"
+#   key ""
+#   action :create
+# end
+
+execute "add_postgres_repo" do
+  command "rpm -Uhv http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-sl92-9.2-8.noarch.rpm"
+  not_if "ls /etc/yum.repos.d | grep pgdg-92-sl"
 end
 
 # ended up running this by hand:
