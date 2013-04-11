@@ -8,6 +8,12 @@ node.override.postgresql.password.postgres = "esker1[BASIC"
 node.override.postgresql.config_pgtune.db_type = "web"
 node.override.postgresql.config_pgtune.total_memory = "2097152kB"
 
+# add the postgres repo
+yum_repository "postgres_scientific" do
+  url "http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-sl92-9.2-8.noarch.rpm"
+  action :create
+end
+
 include_recipe "postgresql::server"
 
 # postgres needs to build from source b/c of issue w/ omnibus
@@ -19,7 +25,7 @@ end
 # it will fail here the first time
 # comment this out and converge again
 # then uncomment
-# include_recipe "postgresql::ruby"
+include_recipe "postgresql::ruby"
 
 postgresql_connection_info = {
   :host => "127.0.0.1",
