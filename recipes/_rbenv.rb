@@ -26,7 +26,7 @@ node.default['rbenv']['user_gems'] = {
 }
 
 include_recipe "ruby_build"
-include_recipe "rbenv::user"
+include_recipe "rbenv::user_install"
 
 
 
