@@ -17,7 +17,7 @@ directory "/var/run/trinidad/" do
 end
 
 template init_config do
-  variables :app_path => node[:squash][:root_dir]
+  variables :app_path => node[:squash][:current_dir]
 end
 
 # this command comes back as a failure from chef unless we file redirect to /dev/null
