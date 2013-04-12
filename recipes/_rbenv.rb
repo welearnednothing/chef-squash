@@ -7,7 +7,11 @@ node['rvm']['user_installs'] = [
                                 { 'user'          => 'deploy',
                                   'default_ruby'  => '1.9.3-p286',
                                   'rubies'        => ['1.9.3-p286', node[:squash][:jruby][:version]]
-                                }
+                                },
+                                { 'user'          => 'root',
+                                  'default_ruby'  => node[:squash][:jruby][:version],
+                                  'rubies'        => [ '1.9.3-p286', node[:squash][:jruby][:version] ]
+                                }                                
                                ]
 
 node.default['rbenv']['user_gems'] = {
