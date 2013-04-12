@@ -1,5 +1,5 @@
-node.default['rbenv']['rubies'] = [ "1.9.3-p286", node[:squash][:jruby][:version] ]
-node.default['rbenv']['global'] = "1.9.3-p286"
+# node.default['rbenv']['rubies'] = [ "1.9.3-p286", node[:squash][:jruby][:version] ]
+# node.default['rbenv']['global'] = "1.9.3-p286"
 
 node['rvm']['user_rubies'] = [ "1.9.3-p286", node[:squash][:jruby][:version] ]
 
@@ -26,6 +26,7 @@ node.default['rbenv']['user_gems'] = {
 }
 
 include_recipe "ruby_build"
-include_recipe "rbenv::system"
+include_recipe "rbenv::user"
+
 
 
