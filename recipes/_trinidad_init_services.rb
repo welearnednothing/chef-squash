@@ -25,7 +25,7 @@ execute "build_trinidad_init_service" do
   command "RBENV_VERSION=#{node[:squash][:jruby][:version]} jruby -S trinidad_init_service --no-ask --defaults #{init_config} > /dev/null 2>&1"
 end
 
-# jsvc get's used to build the init script
+# jsvc gets used to build the init script
 execute "compile_jsvc" do
   command "RBENV_VERSION=jruby-1.7.3 jruby -e \"require 'trinidad_init_services'; _c = Trinidad::InitServices::Configuration.new; _c.send(:compile_jsvc, '/usr/local/src')\""
 end
