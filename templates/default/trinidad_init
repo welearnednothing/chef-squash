@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# trinidad
+# chkconfig: 345 20 80
+# description: trinidad
+# processname: trinidad
+
 # Trinidad init.d script using `jsvc` customized from the jsvc-wrapper.sh
 # http://github.com/nicobrevin/jruby-jsvc/blob/master/bin/jsvc-wrapper.sh
 #
