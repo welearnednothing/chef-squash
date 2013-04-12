@@ -37,16 +37,14 @@ deploy_revision node[:squash][:root_dir] do
   user node[:squash][:user]
   group node[:squash][:group]
   symlinks ({ "secret_token.rb" => "config/initializers/secret_token.rb" })
-  # before_restart do
-  #   execute "bundle" do
-  #     command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && bundle install"
-  #     user node[:squash][:user]
-  #     cwd node[:squash][:current_dir]
-  #     only_if do
-  #       File.exists? File.join(node[:squash][:current_dir], "Gemfile")
-  #     end
-  #  end
-  # end
+  before_restart do
+    execute "bundle" do
+      command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && bundle install"
+      user node[:squash][:user]
+      cwd node[:squash][:current_dir]
+      only_if { File.exists? File.join(node[:squash][:current_dir], "Gemfile") }
+    end
+  end
 end
 
 # things to do to app to get it to start:
