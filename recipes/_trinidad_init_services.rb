@@ -6,6 +6,16 @@ directory "#{node[:squash][:shared_dir]}/tmp" do
   recursive true
 end
 
+directory "/var/log/trinidad/" do
+  owner "deploy"
+  group "deploy"
+end
+
+directory "/var/run/trinidad/" do
+  owner "deploy"
+  group "deploy"
+end
+
 template init_config do
   variables :app_path => node[:squash][:root_dir]
 end
