@@ -37,6 +37,7 @@ end
 
 template "/etc/init.d/trinidad" do
   source "trinidad_init"
+  mode "0755"
   variables :run_user => node.squash.user,
             :app_path => node.squash.current_dir,
             :pid_file => "#{node.default.trinidad.pid_dir}/trinidad.pid",
