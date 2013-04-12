@@ -30,19 +30,28 @@ template "#{node[:squash][:shared_dir]}/config/initializers/secret_token.rb" do
   variables :secret => SecureRandom.hex
 end
 
+# prime the gems
+# execute "bundle_up" do
+#   command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && bundle install"
+#   user "root"
+#   cwd node[:squash][:current_dir]
+# end
+
 deploy_revision node[:squash][:root_dir] do
   migrate true
+  migration_command "bundle install && RAILS_ENV=production bundle exec rake db:migrate --trace"
+  # migration_command "bundle exec rake db:migrate --trace"
+  environment "RAILS_ENV" => "production"
   repository node.squash.repo
   revision node.squash.commit
   user node[:squash][:user]
   group node[:squash][:group]
   symlinks ({ "secret_token.rb" => "config/initializers/secret_token.rb" })
-  before_restart do
+  before_migrate do
     execute "bundle" do
       command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && bundle install"
-      user node[:squash][:user]
+      user "root"
       cwd node[:squash][:current_dir]
-      only_if { File.exists? File.join(node[:squash][:current_dir], "Gemfile") }
     end
   end
 end
