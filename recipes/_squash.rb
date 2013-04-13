@@ -45,7 +45,7 @@ deploy_revision node[:squash][:root_dir] do
     execute "bundle" do
       command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  bundle install --deployment"
       user node[:squash][:user]
-      cwd node[:squash][:current_dir]
+      cwd release_path
       environment ({ 'HOME' => '/home/deploy' })
     end
   end
