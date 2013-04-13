@@ -39,9 +39,9 @@ end
 
 deploy_revision node[:squash][:root_dir] do
   migrate true
-  migration_command "bundle install && RAILS_ENV=production bundle exec rake db:migrate --trace"
+  migration_command "cd #{node[:squash][:current_dir]} && RBENV_VERSION=1.9.3-p286 bundle install && RAILS_ENV=production RBENV_VERSION=1.9.3-p286 bundle exec rake db:migrate --trace"
   # migration_command "bundle exec rake db:migrate --trace"
-  environment "RAILS_ENV" => "production"
+  environment "RAILS_ENV" => "production", "RBENV_VERSION" => "1.9.3-p286"
   repository node.squash.repo
   revision node.squash.commit
   user node[:squash][:user]
@@ -49,9 +49,10 @@ deploy_revision node[:squash][:root_dir] do
   symlinks ({ "secret_token.rb" => "config/initializers/secret_token.rb" })
   before_migrate do
     execute "bundle" do
-      command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && bundle install"
-      user "root"
+      command "RBENV_VERSION=1.9.3-p286 bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && RBENV_VERSION=1.9.3-p286 bundle install --deployment"
+      user node[:squash][:user]
       cwd node[:squash][:current_dir]
+      environment ({ 'HOME' => '/home/deploy' })
     end
   end
 end
