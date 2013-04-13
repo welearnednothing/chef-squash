@@ -1,3 +1,5 @@
+# _squash web site
+
 directory "#{node[:squash][:shared_dir]}/config/initializers" do
   owner node[:squash][:user]
   group node[:squash][:group]
@@ -30,18 +32,10 @@ template "#{node[:squash][:shared_dir]}/config/initializers/secret_token.rb" do
   variables :secret => SecureRandom.hex
 end
 
-# prime the gems
-# execute "bundle_up" do
-#   command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && bundle install"
-#   user "root"
-#   cwd node[:squash][:current_dir]
-# end
-
 deploy_revision node[:squash][:root_dir] do
   migrate true
-  migration_command "cd #{node[:squash][:current_dir]} && RBENV_VERSION=1.9.3-p286 bundle install && RAILS_ENV=production RBENV_VERSION=1.9.3-p286 bundle exec rake db:migrate --trace"
-  # migration_command "bundle exec rake db:migrate --trace"
-  environment "RAILS_ENV" => "production", "RBENV_VERSION" => "1.9.3-p286"
+  migration_command "bundle exec rake db:migrate --trace"
+  environment "RAILS_ENV" => "production"
   repository node.squash.repo
   revision node.squash.revision
   user node[:squash][:user]
@@ -49,7 +43,7 @@ deploy_revision node[:squash][:root_dir] do
   symlinks ({ "secret_token.rb" => "config/initializers/secret_token.rb" })
   before_migrate do
     execute "bundle" do
-      command "RBENV_VERSION=1.9.3-p286 bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config && RBENV_VERSION=1.9.3-p286 bundle install --deployment"
+      command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  bundle install --deployment"
       user node[:squash][:user]
       cwd node[:squash][:current_dir]
       environment ({ 'HOME' => '/home/deploy' })
