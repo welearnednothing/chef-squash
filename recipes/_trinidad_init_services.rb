@@ -1,10 +1,13 @@
 # trinidad_init_services
 
-#init_config = "#{node[:squash][:shared_dir]}/tmp/trinidad_init_defaults.yml"
+# the trinidad_init_services gem creates a trinidad init script for you:
+# https://github.com/trinidad/trinidad_init_services
 
-# irectory "#{node[:squash][:shared_dir]}/tmp" do
-#   recursive true
-# end
+# This recipe used that gem to create an initial /etc/init.d/trinidad
+# that was then templatized
+# It doesn't run the  trinidad_init_service command on it's own.
+
+# it also uses the embedded source to build the jsvc binary
 
 node.default.trinidad.log_dir = "/var/log/trinidad/"
 node.default.trinidad.pid_dir = "/var/run/trinidad/"
@@ -19,20 +22,11 @@ directory node.trinidad.pid_dir do
   group node.squash.group
 end
 
-# template init_config do
-#   variables :app_path => node[:squash][:current_dir]
-# end
-
-# build config file for trinidad_init_service
-# (ended up just performing th below command and stashing the resulting init file in the below template
-
-# execute "build_trinidad_init_service" do
-#   command "RBENV_VERSION=#{node[:squash][:jruby][:version]} jruby -S trinidad_init_service --no-ask --defaults #{init_config} > /dev/null 2>&1"
-# end
-
 # jsvc gets used by the init script
 execute "compile_jsvc" do
   command "RBENV_VERSION=jruby-1.7.3 jruby -e \"require 'trinidad_init_services'; _c = Trinidad::InitServices::Configuration.new; _c.send(:compile_jsvc, '/usr/local/src')\""
+  environment ({ 'HOME' => '/root' })
+  creates "/usr/bin/jsvc"
 end
 
 template "/etc/init.d/trinidad" do
@@ -43,12 +37,6 @@ template "/etc/init.d/trinidad" do
             :pid_file => "#{node.default.trinidad.pid_dir}/trinidad.pid",
             :log_file => "#{node.default.trinidad.log_dir}/trinidad.log"
 end
-
-# the init script buiilder always fails when we try to set run_user to something
-# so set it to nothing and set the value in the init file
-# execute "add_deploy_user_to_init" do
-#   command "sed -i'' s/RUN_USER=\\\"\\\"/RUN_USER=\\\"deploy\\\"/ /etc/init.d/trinidad"
-# end
 
 service "trinidad" do
   action [ :enable, :start ]
