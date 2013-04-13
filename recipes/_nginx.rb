@@ -1,4 +1,5 @@
 node.default[:nginx][:worker_processes] = 4
+node.default['nginx']['default_site_enabled'] = false
 
 include_recipe "nginx"
 
@@ -22,13 +23,12 @@ end
 template "/etc/nginx/sites-available/squash.conf" do
   source "squash_nginx_conf.erb"
   variables  :server_name => node[:squash][:server_name],
-    :port => node[:squash][:port],
-    :ssl_certificate => "#{node[:squash][:ssl_key_dir]}/squash.blueboxgrid.com.crt",
-    :ssl_certificate_key => "#{node[:squash][:ssl_key_dir]}/squash.blueboxgrid.com.key"  
+  :port => node[:squash][:port],
+  :ssl_certificate => "#{node[:squash][:ssl_key_dir]}/squash.blueboxgrid.com.crt",
+  :ssl_certificate_key => "#{node[:squash][:ssl_key_dir]}/squash.blueboxgrid.com.key"
   notifies :restart, "service[nginx]"
 end
 
 link "/etc/nginx/sites-enabled/squash.conf" do
   to "/etc/nginx/sites-available/squash.conf"
 end
-
