@@ -41,8 +41,19 @@ deploy_revision node[:squash][:root_dir] do
   user node[:squash][:user]
   group node[:squash][:group]
   symlinks ({ "secret_token.rb" => "config/initializers/secret_token.rb" })
+
   before_migrate do
-    execute "bundle" do
+
+    # vendor for jruby
+    execute "bundle_jruby" do
+      command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  bundle install --deployment"
+      user node[:squash][:user]
+      cwd release_path
+      environment ({ 'HOME' => '/home/deploy', 'RBENV_VERSION' => node.squash.jruby.version })
+    end
+
+    # vendor for ruby - needed to be able to migrate (jeesh)
+    execute "bundle_ruby" do
       command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  bundle install --deployment"
       user node[:squash][:user]
       cwd release_path
