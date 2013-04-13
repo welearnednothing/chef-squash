@@ -1,4 +1,4 @@
- trinidad_init_services
+# trinidad_init_services
 
 # the trinidad_init_services gem creates a trinidad init script for you:
 # https://github.com/trinidad/trinidad_init_services
