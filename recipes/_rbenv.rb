@@ -1,4 +1,5 @@
-node.default['rbenv']['rubies'] = [ "1.9.3-p286", node[:squash][:jruby][:version] ]
+node.default['rbenv']['rubies'] = [ node[:squash][:ruby][:version],
+                                    node[:squash][:jruby][:version] ]
 
 node.default['rbenv']['gems'] = {
                    node[:squash][:jruby][:version] => [
@@ -10,10 +11,10 @@ node.default['rbenv']['gems'] = {
 
 node.default['rbenv']['user_installs'] = [
   { 'user'    => 'deploy',
-    'rubies'  => [ '1.9.3-p286', node[:squash][:jruby][:version] ],
-    'global'  => '1.9.3-p286',
+    'rubies'  => [ node[:squash][:ruby][:version], node[:squash][:jruby][:version] ],
+    'global'  => node[:squash][:ruby][:version],
     'gems'    => {
-                   '1.9.3-p286'    => [ { 'name'    => 'bundler' } ],
+                   node[:squash][:ruby][:version]    => [ { 'name'    => 'bundler' } ],
                    node[:squash][:jruby][:version] => [
                      { "name" => "bundler" },
                      { "name" => "trinidad" },

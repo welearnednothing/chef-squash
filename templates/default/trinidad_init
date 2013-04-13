@@ -13,9 +13,9 @@
 # https://github.com/trinidad/trinidad_init_services/wiki/Installing-JSVC
 JSVC=/usr/bin/jsvc
 JAVA_HOME=/usr/lib/jvm/java
-JRUBY_HOME=/usr/local/rbenv/versions/jruby-1.7.3
+JRUBY_HOME=/usr/local/rbenv/versions/<%= @jruby %>
 APP_PATH=<%= @app_path %>
-RUBY_SCRIPT=/usr/local/rbenv/versions/jruby-1.7.3/lib/ruby/gems/shared/gems/trinidad_init_services-1.2.2/lib/trinidad/daemon.rb
+RUBY_SCRIPT=/usr/local/rbenv/versions/<%= @jruby -%>/lib/ruby/gems/shared/gems/trinidad_init_services-1.2.2/lib/trinidad/daemon.rb
 # The user rights for the running daemon, if you don't bind directly to 80 than
 # it's always a good idea to run trinidad with non-root user rights.
 # Make sure this user has rights on PIDFILE and LOG_FILE paths.
@@ -46,7 +46,7 @@ fi
 # Implements the jsvc Daemon interface.
 MAIN_CLASS=com.msp.jsvc.JRubyDaemon
 
-CLASSPATH=/usr/local/rbenv/versions/jruby-1.7.3/lib/ruby/gems/shared/gems/trinidad_init_services-1.2.2/trinidad-libs/jruby-jsvc.jar:/usr/local/rbenv/versions/jruby-1.7.3/lib/ruby/gems/shared/gems/trinidad_init_services-1.2.2/trinidad-libs/commons-daemon.jar:/usr/local/rbenv/versions/jruby-1.7.3/lib/jruby.jar
+CLASSPATH=/usr/local/rbenv/versions/<%= @jruby -%>/lib/ruby/gems/shared/gems/trinidad_init_services-1.2.2/trinidad-libs/jruby-jsvc.jar:/usr/local/rbenv/versions/<%= @jruby -%>/lib/ruby/gems/shared/gems/trinidad_init_services-1.2.2/trinidad-libs/commons-daemon.jar:/usr/local/rbenv/versions/<%= @jruby -%>/lib/jruby.jar
 
 JRUBY_SHELL=/bin/sh
 
@@ -100,7 +100,7 @@ fi
 JAVA_PROPS="$JAVA_PROPS \
   -Djruby.shell=$JRUBY_SHELL \
   -Djffi.boot.library.path=$JRUBY_NATIVE_PATH \
-  -Djruby.home=/usr/local/rbenv/versions/jruby-1.7.3 -Djruby.lib=/usr/local/rbenv/versions/jruby-1.7.3/lib -Djruby.script=jruby -Djruby.daemon.module.name=Trinidad -Djruby.compat.version=RUBY1_9 "
+  -Djruby.home=/usr/local/rbenv/versions/<%= @jruby -%> -Djruby.lib=/usr/local/rbenv/versions/<%= @jruby -%>/lib -Djruby.script=jruby -Djruby.daemon.module.name=Trinidad -Djruby.compat.version=RUBY1_9 "
 
 PROC_NAME=${SCRIPT_NAME:-${APP_NAME:-"trinidad"}}
 

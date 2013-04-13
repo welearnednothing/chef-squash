@@ -1,4 +1,4 @@
-# trinidad_init_services
+ trinidad_init_services
 
 # the trinidad_init_services gem creates a trinidad init script for you:
 # https://github.com/trinidad/trinidad_init_services
@@ -24,7 +24,7 @@ end
 
 # jsvc gets used by the init script
 execute "compile_jsvc" do
-  command "RBENV_VERSION=jruby-1.7.3 jruby -e \"require 'trinidad_init_services'; _c = Trinidad::InitServices::Configuration.new; _c.send(:compile_jsvc, '/usr/local/src')\""
+   command "RBENV_VERSION=#{node.squash.jruby.version} jruby -e \"require 'trinidad_init_services'; _c = Trinidad::InitServices::Configuration.new; _c.send(:compile_jsvc, '/usr/local/src')\""
   environment ({ 'HOME' => '/root' })
   creates "/usr/bin/jsvc"
 end
@@ -35,7 +35,8 @@ template "/etc/init.d/trinidad" do
   variables :run_user => node.squash.user,
             :app_path => node.squash.current_dir,
             :pid_file => "#{node.default.trinidad.pid_dir}/trinidad.pid",
-            :log_file => "#{node.default.trinidad.log_dir}/trinidad.log"
+            :log_file => "#{node.default.trinidad.log_dir}/trinidad.log",
+            :jruby => node.squash.jruby.version
 end
 
 service "trinidad" do

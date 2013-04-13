@@ -9,7 +9,7 @@ node.default.squash.db.name = "squash"
 node.default.squash.db.host = "localhost"
 node.default.squash.db.user = "postgres"
 node.default.squash.jruby.version = "jruby-1.7.3"
-
+node.default.squash.ruby.version = "1.9.3-p392"
 node.default[:squash][:server_name] = "squash.blueboxgrid.com"
 node.default[:squash][:ssl_key_dir] = "/etc/nginx/ssl"
 node.default[:squash][:port] = "3000"
