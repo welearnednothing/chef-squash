@@ -43,7 +43,7 @@ deploy_revision node[:squash][:root_dir] do
   # migration_command "bundle exec rake db:migrate --trace"
   environment "RAILS_ENV" => "production", "RBENV_VERSION" => "1.9.3-p286"
   repository node.squash.repo
-  revision node.squash.commit
+  revision node.squash.revision
   user node[:squash][:user]
   group node[:squash][:group]
   symlinks ({ "secret_token.rb" => "config/initializers/secret_token.rb" })
