@@ -24,7 +24,7 @@ template "#{node[:squash][:shared_dir]}/config/database.yml" do
 end
 
 # secret_token
-template "#{node[:squash][:shared_dir]}/config/initializers/secret_token.rb" do
+template "#{node[:squash][:shared_dir]}/secret_token.rb" do
   action :create_if_missing
   owner "deploy"
   group "deploy"
@@ -40,7 +40,10 @@ deploy_revision node[:squash][:root_dir] do
   revision node.squash.revision
   user node[:squash][:user]
   group node[:squash][:group]
-  symlinks ({ "secret_token.rb" => "config/initializers/secret_token.rb" })
+  symlinks ({ "secret_token.rb" => "config/initializers/secret_token.rb",
+              "config/database.yml" => "config/database.yml",
+              "log" => "log",
+              "tmp" => "tmp" })
 
   before_migrate do
 
