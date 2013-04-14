@@ -24,19 +24,25 @@ end
 
 # jsvc gets used by the init script
 execute "compile_jsvc" do
-   command "RBENV_VERSION=#{node.squash.jruby.version} jruby -e \"require 'trinidad_init_services'; _c = Trinidad::InitServices::Configuration.new; _c.send(:compile_jsvc, '/usr/local/src')\""
+  command "RBENV_VERSION=#{node.squash.jruby.version} jruby -e \"require 'trinidad_init_services'; _c = Trinidad::InitServices::Configuration.new; _c.send(:compile_jsvc, '/usr/local/src')\""
   environment ({ 'HOME' => '/root' })
-  creates "/usr/bin/jsvc"
+  creates "/usr/local/src/jsvc-unix-src/jsvc"
+  notifies :run, "execute[cp_jsvc]"
+end
+
+execute "cp_jsvc" do
+  command "cp /usr/local/src/jsvc-unix-src/jsvc /usr/bin/jsvc"
+  action :nothing
 end
 
 template "/etc/init.d/trinidad" do
   source "trinidad_init"
   mode "0755"
   variables :run_user => node.squash.user,
-            :app_path => node.squash.current_dir,
-            :pid_file => "#{node.default.trinidad.pid_dir}/trinidad.pid",
-            :log_file => "#{node.default.trinidad.log_dir}/trinidad.log",
-            :jruby => node.squash.jruby.version
+  :app_path => node.squash.current_dir,
+  :pid_file => "#{node.default.trinidad.pid_dir}/trinidad.pid",
+  :log_file => "#{node.default.trinidad.log_dir}/trinidad.log",
+  :jruby => node.squash.jruby.version
 end
 
 service "trinidad" do
