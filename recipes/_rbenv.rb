@@ -2,6 +2,7 @@ node.default['rbenv']['rubies'] = [ node[:squash][:ruby][:version],
                                     node[:squash][:jruby][:version] ]
 
 node.default['rbenv']['gems'] = {
+                   node[:squash][:ruby][:version] => [ { "name" => "bundler" } ],
                    node[:squash][:jruby][:version] => [
                      { "name" => "bundler" },
                      { "name" => "trinidad" },
