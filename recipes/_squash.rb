@@ -40,19 +40,18 @@ deploy_revision node[:squash][:root_dir] do
   revision node.squash.revision
   user node[:squash][:user]
   group node[:squash][:group]
-  symlinks ({ "secret_token.rb" => "config/initializers/secret_token.rb",
-              "config/database.yml" => "config/database.yml",
-              "log" => "log",
-              "tmp" => "tmp" })
+  create_dirs_before_symlink [ "log" ]
+  symlinks ({ "secret_token.rb"     => "config/initializers/secret_token.rb",
+              "log" => "log"  })
 
   before_migrate do
 
-    # vendor for jruby
+    # vendor for jruby (this will fail when bundler calls git if there is not enough memory available, try 'service trinidad stop' first)
     execute "bundle_jruby" do
-      command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  bundle install --deployment"
+      command "jruby -S bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  jruby -S bundle install --deployment"
       user node[:squash][:user]
       cwd release_path
-      environment ({ 'HOME' => '/home/deploy', 'RBENV_VERSION' => node.squash.jruby.version })
+      environment ({ 'RBENV_VERSION' => node.squash.jruby.version })
     end
 
     # vendor for ruby - needed to be able to migrate (jeesh)
