@@ -32,6 +32,15 @@ template "#{node[:squash][:shared_dir]}/secret_token.rb" do
   variables :secret => SecureRandom.hex
 end
 
+# authentication.yml
+template "#{node[:squash][:shared_dir]}/authentication.yml" do
+  action :create_if_missing
+  owner "deploy"
+  group "deploy"
+  mode "00600"
+  variables :salt => SecureRandom.base64
+end
+
 deploy_revision node[:squash][:root_dir] do
   migrate true
   migration_command "bundle exec rake db:migrate --trace"
@@ -42,7 +51,7 @@ deploy_revision node[:squash][:root_dir] do
   group node[:squash][:group]
   create_dirs_before_symlink [ "log" ]
   symlinks ({ "secret_token.rb"     => "config/initializers/secret_token.rb",
-              "log" => "log"  })
+              "authentication.yml"  => "config/environments/common/authentication.yml" })
 
   before_migrate do
 
@@ -62,6 +71,16 @@ deploy_revision node[:squash][:root_dir] do
       environment ({ 'HOME' => '/home/deploy' })
     end
   end
+
+  before_restart do
+    execute "precompile_assets" do
+      command "bundle exec rake assets:precompile"
+      user node[:squash][:user]
+      cwd release_path
+      environment ({ 'RAILS_ENV' => 'production' })
+    end
+  end
+
 end
 
 # things to do to app to get it to start:
