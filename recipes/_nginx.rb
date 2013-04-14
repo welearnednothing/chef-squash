@@ -1,4 +1,4 @@
-node.default[:nginx][:worker_processes] = 4
+node.default[:nginx][:worker_processes] = 2
 node.default['nginx']['default_site_enabled'] = false
 
 include_recipe "nginx"
