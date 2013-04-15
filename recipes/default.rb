@@ -1,6 +1,7 @@
 #
 # Cookbook Name:: squash
 # Recipe:: default
+# Author:: Sam Cooper <scooper@bluebox.net>
 #
 # Copyright 2013, Blue Box Group, LLC
 #
