@@ -17,13 +17,17 @@ include_recipe "postgresql::server"
 
 # postgres needs to build from source b/c of issue w/ omnibus
 # http://lists.opscode.com/sympa/arc/chef/2012-10/msg00133.html
+
+# this link is probably necessary only on rhel (not sure though)
 link "/usr/bin/pg_config" do
   to "/usr/pgsql-9.2/bin/pg_config"
 end
 
-# it will fail here the first time
-# comment this out and converge again
-# then uncomment
+# this is the work around for pg gem not installing into omnibus
+# but it's evaling before my postgres packages have been pulled down
+# so had to wrap in this guard
+# now you fail later in the run when the below postgres lwrp's get ran
+# at that point just reconverge and then the pg gem will install and converge should finish
 if `rpm -qa`.include?('postgresql92')
   include_recipe "postgresql::ruby"
 end
