@@ -48,3 +48,9 @@ end
 service "trinidad" do
   action [ :enable, :start ]
 end
+
+# start is failing, not sure what's up, ergo this
+execute "start_trinidad" do
+  command "service trinidad start"
+  not_if "ps aux | grep -v grep | grep trinidad"
+end
