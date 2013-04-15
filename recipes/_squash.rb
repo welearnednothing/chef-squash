@@ -43,7 +43,9 @@ deploy_revision node[:squash][:root_dir] do
 
   before_migrate do
 
-    # vendor for jruby (this will fail when bundler calls git if there is not enough memory available, try 'service trinidad stop' first)
+    # vendor for jruby
+    # (this will fail when bundler calls git if there is not enough memory available)
+    # try 'service trinidad stop' if that happens
     execute "bundle_jruby" do
       command "jruby -S bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  jruby -S bundle install --deployment"
       user node[:squash][:user]
@@ -51,7 +53,7 @@ deploy_revision node[:squash][:root_dir] do
       environment ({ 'RBENV_VERSION' => node.squash.jruby.version })
     end
 
-    # vendor for ruby - needed to be able to migrate (jeesh)
+    # vendor for ruby - needed to be able to migrate
     execute "bundle_ruby" do
       command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  bundle install --deployment"
       user node[:squash][:user]
@@ -70,9 +72,3 @@ deploy_revision node[:squash][:root_dir] do
   end
 
 end
-
-# things to do to app to get it to start:
-# bundle exec rake assets:precompile
-
-# maybe fork squash and set this up for nginx
-# config/environments/production.rb#42
