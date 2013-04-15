@@ -12,11 +12,11 @@ directory node[:squash][:ssl_key_dir] do
 end
 
 # place keys
-cookbook_file "#{node[:squash][:ssl_key_dir]}/squash.blueboxgrid.com.key" do
+cookbook_file "#{node[:squash][:ssl_key_dir]}/squash.key" do
   mode "600"
 end
 
-cookbook_file "#{node[:squash][:ssl_key_dir]}/squash.blueboxgrid.com.crt" do
+cookbook_file "#{node[:squash][:ssl_key_dir]}/squash.crt" do
   mode "755"
 end
 
@@ -24,8 +24,8 @@ template "/etc/nginx/sites-available/squash.conf" do
   source "squash_nginx_conf.erb"
   variables  :server_name => node[:squash][:server_name],
   :port => node[:squash][:port],
-  :ssl_certificate => "#{node[:squash][:ssl_key_dir]}/squash.blueboxgrid.com.crt",
-  :ssl_certificate_key => "#{node[:squash][:ssl_key_dir]}/squash.blueboxgrid.com.key"
+  :ssl_certificate => "#{node[:squash][:ssl_key_dir]}/squash.crt",
+  :ssl_certificate_key => "#{node[:squash][:ssl_key_dir]}/squash.key"
   notifies :restart, "service[nginx]"
 end
 
