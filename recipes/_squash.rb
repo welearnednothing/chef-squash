@@ -1,17 +1,5 @@
 # _squash web site
 
-directory "#{node[:squash][:shared_dir]}/config/initializers" do
-  owner node[:squash][:user]
-  group node[:squash][:group]
-  recursive true
-  notifies :run, "execute[chown_srv_squash]", :immediately
-end
-
-execute "chown_srv_squash" do
-  command "chown -R #{node[:squash][:user]}:#{node[:squash][:group]} #{node[:squash][:root_dir]}"
-  action :nothing
-end
-
 # database.yml
 template "#{node[:squash][:shared_dir]}/config/database.yml" do
   owner "deploy"
