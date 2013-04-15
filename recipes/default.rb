@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-directory "/var/cache/kitchen-solo"
-
 include_recipe "yum::epel"
 include_recipe "squash::_nginx"
 include_recipe "squash::_user"
