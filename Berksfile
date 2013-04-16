@@ -23,6 +23,7 @@ cookbook 'nginx',             :git => 'git://github.com/bbg-cookbooks/nginx.git'
 cookbook 'aws'
 cookbook 'xfs'
 cookbook 'mysql'
+cookbook 'openssl'
 cookbook 'postgresql', :git => 'git://github.com/opscode-cookbooks/postgresql.git'
 cookbook 'database'
 
