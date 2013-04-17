@@ -19,12 +19,8 @@
 #
 
 node.default.users = ['deploy', 'blueboxadmin']
-node.default.authorization = {
-  'sudo' => {
-    'users' => ['deploy','blueboxadmin' ],
-    'passwordless' => true
-  }  
-}
+node.default.authoration.sudo.users = ['deploy','blueboxadmin' ]
+node.default.authoration.sudo.passwordless = true
 node.default.groups = ["blueboxadmin", "deploy"]
 
 include_recipe "group::data_bag"
