@@ -18,6 +18,18 @@
 # limitations under the License.
 #
 
+directory "#{node[:squash][:shared_dir]}/config" do
+  owner node[:squash][:user]
+  group node[:squash][:group]
+  recursive true
+  notifies :run, "execute[chown_srv_squash]", :immediately
+end
+
+execute "chown_srv_squash" do
+  command "chown -R #{node[:squash][:user]}:#{node[:squash][:group]} #{node[:squash][:root_dir]}"
+  action :nothing
+end
+
 # database.yml
 template "#{node[:squash][:shared_dir]}/config/database.yml" do
   owner "deploy"
