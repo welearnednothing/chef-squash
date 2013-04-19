@@ -60,7 +60,7 @@ template "#{node[:squash][:shared_dir]}/authentication.yml" do
 end
 
 deploy_revision node[:squash][:root_dir] do
-  action node.force_deploy_app ? :force_deploy : :deploy
+  action (node.attribute?("force_deploy_app") && node.force_deploy_app) ? :force_deploy : :deploy
   migrate true
   migration_command "bundle exec rake db:migrate --trace"
   environment "RAILS_ENV" => "production"
@@ -78,18 +78,16 @@ deploy_revision node[:squash][:root_dir] do
     # (this will fail when bundler calls git if there is not enough memory available)
     # try 'service trinidad stop' if that happens
     execute "bundle_jruby" do
-      command "jruby -S bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  jruby -S bundle install --deployment"
-      user node[:squash][:user]
+      command "sudo -u #{node.squash.user} RBENV_VERSION=#{node.squash.jruby.version} jruby -S bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  sudo -u #{node.squash.user} RBENV_VERSION=#{node.squash.jruby.version} jruby -S bundle install --deployment"
+      user 'root'
       cwd release_path
-      environment ({ 'RBENV_VERSION' => node.squash.jruby.version })
     end
 
     # vendor for ruby - needed to be able to migrate
     execute "bundle_ruby" do
-      command "bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  bundle install --deployment"
-      user node[:squash][:user]
+      command "sudo -u #{node.squash.user} RBENV_VERSION=#{node.squash.ruby.version} bundle config build.pg --with-pg-config=/usr/pgsql-9.2/bin/pg_config &&  sudo -u #{node.squash.user} RBENV_VERSION=#{node.squash.ruby.version} bundle install --deployment"
+      user 'root'
       cwd release_path
-      environment ({ 'HOME' => '/home/deploy' })
     end
   end
 
