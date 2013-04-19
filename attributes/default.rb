@@ -1,7 +1,10 @@
+
 # normally repo would be set to square's repo but I'm having this rake gem issue
 # https://github.com/SquareSquash/web/issues/71
 
-node.default.squash.repo = "git://github.com/SquareSquash/web.git"
+# node.default.squash.repo = "git://github.com/SquareSquash/web.git"
+node.default.squash.repo = "git://github.com/blueboxgroup/web.git"
+
 node.default.squash.revision = "master"
 node.default.squash.user = "deploy"
 node.default.squash.group = "deploy"
