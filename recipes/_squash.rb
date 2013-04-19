@@ -60,6 +60,7 @@ template "#{node[:squash][:shared_dir]}/authentication.yml" do
 end
 
 deploy_revision node[:squash][:root_dir] do
+  action node.force_deploy_app ? :force_deploy : :deploy
   migrate true
   migration_command "bundle exec rake db:migrate --trace"
   environment "RAILS_ENV" => "production"
