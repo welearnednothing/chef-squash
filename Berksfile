@@ -1,6 +1,5 @@
 metadata
 
-cookbook 'bluebox',           :git => 'git@github.blueboxgrid.com:chef/bluebox.git'
 cookbook 'user',              :git => 'https://github.com/fnichol/chef-user.git'
 cookbook 'group',             :git => 'git://github.com/bbg-cookbooks/chef-group.git'
 cookbook 'sudo'
@@ -26,7 +25,3 @@ cookbook 'mysql'
 cookbook 'openssl'
 cookbook 'postgresql', :git => 'git://github.com/opscode-cookbooks/postgresql.git'
 cookbook 'database'
-
-group "bluebox_internal" do
-  cookbook 'bbg_repositories', :git => 'git@github.blueboxgrid.com:chef/bbg_repositories.git'
-end
