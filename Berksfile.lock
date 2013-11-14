@@ -1,22 +1,96 @@
-cookbook 'squash', :path => '/Users/scooper/git_repos/cookbooks/squash'
-cookbook 'yum', :locked_version => '2.1.0'
-cookbook 'apt', :locked_version => '1.8.4'
-cookbook 'git', :locked_version => '2.1.2'
-cookbook 'java', :git => 'git://github.com/opscode-cookbooks/java.git', :ref => 'c9fe9875b2e4f764847070972b5a2559b1d72cd3'
-cookbook 'jboss', :git => 'git://github.com/bryanwb/chef-jboss.git', :ref => '4c3ae28f5c4e54bf3509fc6daf8b56a4b22ec365'
-cookbook 'ruby_build', :git => 'git://github.com/fnichol/chef-ruby_build.git', :ref => 'c940b5e9cd40eaba10d6285de6648f4d25fe959d'
-cookbook 'rbenv', :git => 'git://github.com/fnichol/chef-rbenv.git', :ref => '3b1c59abc1134a50b0b8844954eca9a566aaffb8'
-cookbook 'nginx', :git => 'git://github.com/bbg-cookbooks/nginx.git', :ref => 'bluebox'
-cookbook 'unicorn', :locked_version => '1.1.0'
-cookbook 'postgresql', :git => 'git://github.com/opscode-cookbooks/postgresql.git', :ref => '1dfa582a9b844c3cbe6019a3ddb831af004dce52'
-cookbook 'user', :locked_version => '0.3.0'
-cookbook 'dmg', :locked_version => '1.0.0'
-cookbook 'runit', :locked_version => '0.15.0'
-cookbook 'build-essential', :locked_version => '1.2.0'
-cookbook 'windows', :locked_version => '1.7.0'
-cookbook 'chef_handler', :locked_version => '1.1.4'
-cookbook 'logrotate', :locked_version => '1.0.2'
-cookbook 'bluepill', :locked_version => '2.2.0'
-cookbook 'rsyslog', :locked_version => '1.5.0'
-cookbook 'ohai', :locked_version => '1.1.6'
-cookbook 'openssl', :locked_version => '1.0.0'
+{
+  "sources": {
+    "squash": {
+      "path": "."
+    },
+    "user": {
+      "locked_version": "0.3.0"
+    },
+    "group": {
+      "locked_version": "0.0.1",
+      "git": "git://github.com/bbg-cookbooks/chef-group.git",
+      "ref": "376eaf830b61dce19dd9c75522d185ea288f4297"
+    },
+    "sudo": {
+      "locked_version": "2.2.2"
+    },
+    "yum": {
+      "locked_version": "2.1.0"
+    },
+    "apt": {
+      "locked_version": "1.8.4"
+    },
+    "git": {
+      "locked_version": "2.1.2"
+    },
+    "java": {
+      "locked_version": "1.10.0",
+      "git": "git://github.com/opscode-cookbooks/java.git",
+      "ref": "c9fe9875b2e4f764847070972b5a2559b1d72cd3"
+    },
+    "tomcat": {
+      "locked_version": "0.12.0",
+      "git": "git://github.com/bbg-cookbooks/tomcat.git",
+      "ref": "c4e5a4b12070c37bfe8e3cf6f76a70e8d9f7bdcc"
+    },
+    "ruby_build": {
+      "locked_version": "0.7.2",
+      "git": "git://github.com/fnichol/chef-ruby_build.git",
+      "ref": "c940b5e9cd40eaba10d6285de6648f4d25fe959d"
+    },
+    "rbenv": {
+      "locked_version": "0.7.3",
+      "git": "git://github.com/fnichol/chef-rbenv.git",
+      "ref": "3b1c59abc1134a50b0b8844954eca9a566aaffb8"
+    },
+    "nginx": {
+      "locked_version": "1.1.2",
+      "git": "git://github.com/bbg-cookbooks/nginx.git",
+      "ref": "d537824ee65c0809886d420b5b0b0b07d285e17b"
+    },
+    "aws": {
+      "locked_version": "1.0.0"
+    },
+    "xfs": {
+      "locked_version": "1.1.0"
+    },
+    "mysql": {
+      "locked_version": "4.0.4"
+    },
+    "openssl": {
+      "locked_version": "1.0.0"
+    },
+    "postgresql": {
+      "locked_version": "2.2.2",
+      "git": "git://github.com/opscode-cookbooks/postgresql.git",
+      "ref": "1dfa582a9b844c3cbe6019a3ddb831af004dce52"
+    },
+    "database": {
+      "locked_version": "1.5.2"
+    },
+    "dmg": {
+      "locked_version": "2.0.8"
+    },
+    "runit": {
+      "locked_version": "1.4.0"
+    },
+    "build-essential": {
+      "locked_version": "1.4.2"
+    },
+    "windows": {
+      "locked_version": "1.11.0"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.4"
+    },
+    "bluepill": {
+      "locked_version": "2.3.0"
+    },
+    "rsyslog": {
+      "locked_version": "1.9.0"
+    },
+    "ohai": {
+      "locked_version": "1.1.12"
+    }
+  }
+}
